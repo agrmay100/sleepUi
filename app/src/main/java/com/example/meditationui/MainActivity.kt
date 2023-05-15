@@ -27,8 +27,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 // A surface container using the 'background' color from the theme
                 NavHost(navController = navController, startDestination = "home") {
-                    composable("home") { HomeScreen() }
-                    composable("detail") { DetailScreen(/*...*/) }
+                    composable("home") { HomeScreen(navController = navController) }
+                    composable("detail") { DetailScreen(navController = navController) }
                     /*...*/
                 }
             }

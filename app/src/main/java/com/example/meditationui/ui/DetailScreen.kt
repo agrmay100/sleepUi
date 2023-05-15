@@ -92,7 +92,7 @@ fun DetailScreen(
                         )
                         Spacer(modifier = Modifier.height(20.dp))
 
-                        featureItem(feature = feature, ratio = 1.4f)
+                        featureItem(feature = feature, ratio = 1.4f, navController = navController)
 
                         Spacer(modifier = Modifier.height(30.dp))
                         Text(

@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.meditationui.data.Constants
 import com.example.meditationui.data.Feature
 import com.example.meditationui.ui.theme.ButtonBlue
@@ -26,13 +28,19 @@ import com.example.meditationui.ui.theme.TextWhite
 fun featureItem(
     feature: Feature,
     ratio: Float = 1f,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     BoxWithConstraints(
-        modifier = Modifier
+        modifier = modifier
             .aspectRatio(ratio)
             .clip(RoundedCornerShape(10.dp))
             .background(feature.darkColor)
+            .clickable {
+                if (navController.previousBackStackEntry == null) {
+                    navController.navigate("detail")
+                }
+            }
     ) {
         val height = constraints.maxHeight
         val width = constraints.maxWidth
@@ -79,7 +87,8 @@ fun featureItem(
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .clip(RoundedCornerShape(10.dp))
-                    .background(ButtonBlue).clickable {
+                    .background(ButtonBlue)
+                    .clickable {
                         // Handle the click
                     }
                     .padding(vertical = 6.dp, horizontal = 15.dp)

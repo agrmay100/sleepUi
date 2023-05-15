@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.meditationui.data.BottomMenuContent
 import com.example.meditationui.data.Constants
 import com.example.meditationui.data.Feature
@@ -42,7 +43,9 @@ import com.example.meditationui.ui.components.featureItem
 import com.example.meditationui.ui.theme.*
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController
+) {
     Box(
         modifier = Modifier
             .background(DeepBlue)
@@ -53,11 +56,11 @@ fun HomeScreen() {
         Column(
 //            modifier = Modifier
 //                .verticalScroll(rememberScrollState())
-        ){
+        ) {
             GreetingSection()
             ChipSection(chips = Constants.chipsList)
             CurrentMeditation()
-            FeatureSection(features = Constants.features)
+            FeatureSection(features = Constants.features, navController = navController)
         }
         BottomMenu(
             items = Constants.bottomItems,
@@ -190,7 +193,7 @@ fun CurrentMeditation() {
 }
 
 @Composable
-fun FeatureSection(features: List<Feature>) {
+fun FeatureSection(features: List<Feature>, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -210,7 +213,11 @@ fun FeatureSection(features: List<Feature>) {
         ) {
 
             items(features.size) {
-                featureItem(feature = features[it], modifier = Modifier.padding(7.5.dp))
+                featureItem(
+                    feature = features[it],
+                    modifier = Modifier.padding(7.5.dp),
+                    navController = navController
+                )
             }
 
         }
